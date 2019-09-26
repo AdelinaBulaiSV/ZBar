@@ -56,10 +56,15 @@
 
 #ifndef NDEBUG
     overlay.borderWidth = 2;
-    overlay.borderColor = [UIColor colorWithRed: 1
-                                   green: 0
-                                   blue: 0
-                                   alpha: .5].CGColor;
+//    overlay.borderColor = [UIColor colorWithRed: 1 //edit to test
+//                                   green: 0
+//                                   blue: 0
+//                                   alpha: .5].CGColor;
+    overlay.borderColor = [UIColor colorWithRed: 0 //edit to test
+                                          green: 1
+                                           blue: 0
+                                          alpha: .5].CGColor;
+    
     cropLayer = [CALayer new];
     cropLayer.backgroundColor = [UIColor clearColor].CGColor;
     cropLayer.borderWidth = 2;
