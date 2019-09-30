@@ -40,6 +40,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		B89CD6B6233E4F8500380862 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89CD6B5233E4F8500380862 /* WebKit.framework */; };
 		DC26004C118631C200FA987B /* ZBarCaptureReader.m in Sources */ = {isa = PBXBuildFile; fileRef = DC26004B118631C200FA987B /* ZBarCaptureReader.m */; };
 		DC290E281351496400A9B857 /* codabar.c in Sources */ = {isa = PBXBuildFile; fileRef = DC290E261351496400A9B857 /* codabar.c */; };
 		DC299A9D1208B5E8006A023C /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC07E0554694100DB518D /* libzbar.a */; };
@@ -239,6 +240,7 @@
 
 /* Begin PBXFileReference section */
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B89CD6B5233E4F8500380862 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libzbar.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libzbar.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC1A49A211FF33B300BCDA30 /* zbar-help.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "zbar-help.html"; path = "res/zbar-help.html"; sourceTree = "<group>"; };
 		DC1A49A311FF33B300BCDA30 /* zbar-helpicons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zbar-helpicons.png"; path = "res/zbar-helpicons.png"; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B89CD6B6233E4F8500380862 /* WebKit.framework in Frameworks */,
 				DC299B841208FCAB006A023C /* Foundation.framework in Frameworks */,
 				DC299B061208FC11006A023C /* CoreGraphics.framework in Frameworks */,
 				DC299B311208FCA3006A023C /* UIKit.framework in Frameworks */,
@@ -399,6 +402,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B89CD6B5233E4F8500380862 /* WebKit.framework */,
 				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
 				DC299B051208FC11006A023C /* CoreGraphics.framework */,
 				DC67C08210A079BE0033B702 /* UIKit.framework */,

@@ -84,17 +84,12 @@
         picker.delegate = self;
     }
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        if(!pickerPopover)
-            pickerPopover = [[UIPopoverController alloc]
-                                initWithContentViewController: picker];
-        [pickerPopover presentPopoverFromRect: CGRectZero
-                       inView: readerView
-                       permittedArrowDirections: UIPopoverArrowDirectionAny
-                       animated: YES];
+        picker.modalPresentationStyle = UIModalPresentationPopover;
+        picker.popoverPresentationController.sourceView = readerView;
+        [viewController presentViewController:picker animated:YES completion:nil];
     }
     else
-        [viewController presentModalViewController: picker
-                        animated: YES];
+        [viewController presentViewController:picker animated:YES completion:nil];
 }
 
 - (void)  imagePickerController: (UIImagePickerController*) _picker
@@ -102,10 +97,11 @@
 {
     UIImage *image = [info objectForKey: UIImagePickerControllerOriginalImage];
 
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [pickerPopover dismissPopoverAnimated: YES];
-    else
-        [_picker dismissModalViewControllerAnimated: YES];
+    } else {
+        [_picker dismissViewControllerAnimated:YES completion:nil];
+    }
 
     [readerView performSelector: @selector(scanImage:)
                 withObject: image
@@ -114,7 +110,7 @@
 
 - (void) imagePickerControllerDidCancel: (UIImagePickerController*) _picker
 {
-    [_picker dismissModalViewControllerAnimated: YES];
+    [_picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

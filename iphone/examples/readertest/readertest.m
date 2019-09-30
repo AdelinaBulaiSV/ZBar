@@ -682,16 +682,12 @@ static const CGFloat const zoom_choices[] = {
 
 - (void) alertUnsupported
 {
-    UIAlertView *alert =
-        [[UIAlertView alloc]
-            initWithTitle: @"Unsupported"
-            message: @"Setting not available for this reader"
-            @" (or with this OS on this device)"
-            delegate: nil
-            cancelButtonTitle: @"Cancel"
-            otherButtonTitles: nil];
-    [alert show];
-    [alert release];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Unsupported"
+                                                                   message:@"Setting not available for this reader"
+                                                                   @" (or with this OS on this device)"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void) advanceCrop: (UILabel*) label

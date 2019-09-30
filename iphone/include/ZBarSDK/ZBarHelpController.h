@@ -36,7 +36,7 @@
 
 // failure dialog w/a few useful tips
 
-@interface ZBarHelpController : UIViewController < WKNavigationDelegate, WKUIDelegate, UIAlertViewDelegate >
+@interface ZBarHelpController : UIViewController < WKNavigationDelegate, WKUIDelegate >
 {
     NSString *reason;
     id delegate;

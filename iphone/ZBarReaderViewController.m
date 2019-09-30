@@ -51,6 +51,8 @@ UICameraForAVPosition (AVCaptureDevicePosition position)
         return(UIImagePickerControllerCameraDeviceRear);
     case AVCaptureDevicePositionFront:
         return(UIImagePickerControllerCameraDeviceFront);
+    case AVCaptureDevicePositionUnspecified:
+        return(UIImagePickerControllerCameraDeviceRear);
     }
     return(-1);
 }
@@ -196,7 +198,7 @@ AVSessionPresetForUIVideoQuality (UIImagePickerControllerQualityType quality)
     if(!self)
         return(nil);
 
-    self.wantsFullScreenLayout = YES;
+    self.extendedLayoutIncludesOpaqueBars = YES;
     [self _init];
     return(self);
 }
@@ -341,8 +343,7 @@ AVSessionPresetForUIVideoQuality (UIImagePickerControllerQualityType quality)
         UIViewAutoresizingFlexibleWidth |
         UIViewAutoresizingFlexibleHeight;
 
-    if(showsZBarControls ||
-       self.parentViewController.modalViewController == self)
+    if(showsZBarControls || self.parentViewController.presentedViewController == self)
     {
         autoresize |= UIViewAutoresizingFlexibleBottomMargin;
         r.size.height -= 54;
@@ -395,12 +396,11 @@ AVSessionPresetForUIVideoQuality (UIImagePickerControllerQualityType quality)
 
 - (void) viewWillAppear: (BOOL) animated
 {
-    zlog(@"willAppear: anim=%d orient=%d",
-         animated, self.interfaceOrientation);
+    zlog(@"willAppear: anim=%d orient=%d", animated, [[UIApplication sharedApplication] statusBarOrientation]);
     [self initControls];
     [super viewWillAppear: animated];
 
-    [readerView willRotateToInterfaceOrientation: self.interfaceOrientation
+    [readerView willRotateToInterfaceOrientation: [[UIApplication sharedApplication] statusBarOrientation]
                 duration: 0];
     [readerView performSelector: @selector(start)
                 withObject: nil
@@ -409,11 +409,11 @@ AVSessionPresetForUIVideoQuality (UIImagePickerControllerQualityType quality)
     shutter.hidden = NO;
 
     UIApplication *app = [UIApplication sharedApplication];
-    BOOL willHideStatusBar =
-        !didHideStatusBar && self.wantsFullScreenLayout && !app.statusBarHidden;
-    if(willHideStatusBar)
-        [app setStatusBarHidden: YES
-             withAnimation: UIStatusBarAnimationFade];
+    BOOL willHideStatusBar = !didHideStatusBar && self.extendedLayoutIncludesOpaqueBars && !app.statusBarHidden;
+    if(willHideStatusBar) {
+        [self prefersStatusBarHidden];
+    }
+
     didHideStatusBar = didHideStatusBar || willHideStatusBar;
 }
 
@@ -545,7 +545,7 @@ AVSessionPresetForUIVideoQuality (UIImagePickerControllerQualityType quality)
         [readerDelegate
             imagePickerControllerDidCancel: (UIImagePickerController*)self];
     else
-        [self dismissModalViewControllerAnimated: YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) info
@@ -560,7 +560,7 @@ AVSessionPresetForUIVideoQuality (UIImagePickerControllerQualityType quality)
     helpController = [[ZBarHelpController alloc]
                          initWithReason: reason];
     helpController.delegate = (id<ZBarHelpDelegate>)self;
-    helpController.wantsFullScreenLayout = YES;
+    helpController.extendedLayoutIncludesOpaqueBars = YES;
     UIView *helpView = helpController.view;
     helpView.alpha = 0;
     helpView.frame = self.view.bounds;

@@ -207,7 +207,7 @@
     if([delegate respondsToSelector: @selector(helpControllerDidFinish:)])
         [delegate helpControllerDidFinish: self];
     else
-        [self dismissModalViewControllerAnimated: YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
@@ -243,25 +243,17 @@
     }
     
     linkURL = [url retain];
-    UIAlertView *alert =
-    [[UIAlertView alloc]
-     initWithTitle: @"Open External Link"
-     message: @"Close this application and open link in Safari?"
-     delegate: nil
-     cancelButtonTitle: @"Cancel"
-     otherButtonTitles: @"OK", nil];
-    alert.delegate = self;
-    [alert show];
-    [alert release];
-    decisionHandler(WKNavigationActionPolicyCancel);
-}
 
-- (void)     alertView: (UIAlertView*) view
-  clickedButtonAtIndex: (NSInteger) idx
-{
-    if(idx)
-        [[UIApplication sharedApplication]
-            openURL: linkURL];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Open External Link"
+                                                                   message:@"Close this application and open link in Safari?"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[UIApplication sharedApplication] openURL:linkURL options:@{} completionHandler:nil];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    decisionHandler(WKNavigationActionPolicyCancel);
 }
 
 @end

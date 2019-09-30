@@ -588,15 +588,14 @@ CGImageRef UIGetScreenImage(void);
     help.delegate = (id<ZBarHelpDelegate>)self;
 
     if(self.sourceType != UIImagePickerControllerSourceTypeCamera) {
-        [self presentModalViewController: help
-              animated: YES];
+        [self presentViewController:help animated:YES completion:nil];
         return;
     }
 
     // show help as overlay view to workaround controller bugs
     sampling = NO;
     scanner.enableCache = NO;
-    help.wantsFullScreenLayout = YES;
+    help.extendedLayoutIncludesOpaqueBars = YES;
     help.view.alpha = 0;
 
     UIView *activeOverlay = [self cameraOverlayView];
@@ -650,7 +649,7 @@ CGImageRef UIGetScreenImage(void);
             [readerDelegate imagePickerController: self
                             didFinishPickingMediaWithInfo: newinfo];
         else
-            [self dismissModalViewControllerAnimated: YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
         [newinfo release];
         return;
     }
@@ -667,7 +666,7 @@ CGImageRef UIGetScreenImage(void);
                         withRetry: retry];
     else if(!retry)
         // must dismiss stock controller
-        [self dismissModalViewControllerAnimated: YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) imagePickerControllerDidCancel: (UIImagePickerController*) picker
@@ -676,7 +675,7 @@ CGImageRef UIGetScreenImage(void);
     if([readerDelegate respondsToSelector: cb])
         [readerDelegate imagePickerControllerDidCancel: self];
     else
-        [self dismissModalViewControllerAnimated: YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 // ZBarHelpDelegate
@@ -691,7 +690,7 @@ CGImageRef UIGetScreenImage(void);
         [self initScanning];
     }
     else
-        [hlp dismissModalViewControllerAnimated: YES];
+        [hlp dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (id <NSFastEnumeration>) scanImage: (CGImageRef) image
