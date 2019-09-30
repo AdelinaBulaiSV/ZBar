@@ -114,10 +114,10 @@
     previewTransform = CGAffineTransformIdentity;
     maxZoom = 2;
 
-    pinch = [[UIPinchGestureRecognizer alloc]
-                initWithTarget: self
-                action: @selector(handlePinch)];
-    [self addGestureRecognizer: pinch];
+//    pinch = [[UIPinchGestureRecognizer alloc]
+//                initWithTarget: self
+//                action: @selector(handlePinch)];
+//    [self addGestureRecognizer: pinch];
 }
 
 - (id) initWithImageScanner: (ZBarImageScanner*) scanner
@@ -125,11 +125,6 @@
     self = [super initWithFrame: CGRectMake(0, 0, 320, 426)];
     if(!self)
         return(nil);
-    
-    //test
-    UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(50, 100, 100, 100)];
-    testView.backgroundColor = UIColor.orangeColor;
-    [self addSubview:testView];
 
     self.backgroundColor = [UIColor blackColor];
     self.contentMode = UIViewContentModeScaleAspectFill;
