@@ -56,14 +56,10 @@
 
 #ifndef NDEBUG
     overlay.borderWidth = 2;
-//    overlay.borderColor = [UIColor colorWithRed: 1 //edit to test
-//                                   green: 0
-//                                   blue: 0
-//                                   alpha: .5].CGColor;
-    overlay.borderColor = [UIColor colorWithRed: 0 //edit to test
-                                          green: 1
-                                           blue: 0
-                                          alpha: .5].CGColor;
+    overlay.borderColor = [UIColor colorWithRed: 1
+                                   green: 0
+                                   blue: 0
+                                   alpha: .5].CGColor;
     
     cropLayer = [CALayer new];
     cropLayer.backgroundColor = [UIColor clearColor].CGColor;
@@ -129,6 +125,11 @@
     self = [super initWithFrame: CGRectMake(0, 0, 320, 426)];
     if(!self)
         return(nil);
+    
+    //test
+    UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(50, 100, 100, 100)];
+    testView.backgroundColor = UIColor.orangeColor;
+    [self addSubview:testView];
 
     self.backgroundColor = [UIColor blackColor];
     self.contentMode = UIViewContentModeScaleAspectFill;
