@@ -114,10 +114,10 @@
     previewTransform = CGAffineTransformIdentity;
     maxZoom = 2;
 
-//    pinch = [[UIPinchGestureRecognizer alloc]
-//                initWithTarget: self
-//                action: @selector(handlePinch)];
-//    [self addGestureRecognizer: pinch];
+    pinch = [[UIPinchGestureRecognizer alloc]
+                initWithTarget: self
+                action: @selector(handlePinch)];
+    [self addGestureRecognizer: pinch];
 }
 
 - (id) initWithImageScanner: (ZBarImageScanner*) scanner
